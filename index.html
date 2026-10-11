@@ -159,6 +159,29 @@
         <p class="closing__small">4° cumpleaños · Sábado 24 de octubre · 1:00 PM</p>
     </footer>
 
+    <!-- ===================== Música de fondo ===================== -->
+    <audio id="bg-music" loop preload="auto"
+        src="music/Life%20Is%20a%20Highway%20-%20Cars%20(Music%20Video).mp3"></audio>
+    <button class="music-toggle" id="music-toggle" type="button" aria-label="Reproducir música"
+        aria-pressed="false">
+        <span class="music-toggle__icon music-toggle__icon--off" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polygon points="4 9 8 9 13 5 13 19 8 15 4 15 4 9"></polygon>
+                <line x1="17" y1="9" x2="22" y2="14"></line>
+                <line x1="22" y1="9" x2="17" y2="14"></line>
+            </svg>
+        </span>
+        <span class="music-toggle__icon music-toggle__icon--on" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polygon points="4 9 8 9 13 5 13 19 8 15 4 15 4 9"></polygon>
+                <path d="M17 8.5a5 5 0 0 1 0 7"></path>
+                <path d="M19.5 6a8.5 8.5 0 0 1 0 12"></path>
+            </svg>
+        </span>
+    </button>
+
     <script src="script.js"></script>
 </body>
 

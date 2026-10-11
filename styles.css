@@ -457,6 +457,69 @@ body {
   color: var(--gray);
 }
 
+/* ===================== Botón de música ===================== */
+.music-toggle {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 60;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--white);
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.music-toggle:hover { transform: scale(1.07); }
+.music-toggle:active { transform: scale(0.94); }
+.music-toggle:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
+}
+
+.music-toggle__icon {
+  display: none;
+  width: 26px;
+  height: 26px;
+}
+.music-toggle__icon svg {
+  display: block;
+  width: 26px;
+  height: 26px;
+}
+
+/* Ícono según estado: altavoz con ondas (suena) / altavoz tachado (silencio) */
+.music-toggle:not(.is-playing) .music-toggle__icon--off { display: block; }
+.music-toggle.is-playing .music-toggle__icon--on { display: block; }
+
+/* Latido suave mientras la música suena */
+.music-toggle.is-playing { animation: music-beat 2.6s ease-in-out infinite; }
+@keyframes music-beat {
+  0%, 100% { box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); }
+  50% { box-shadow: 0 8px 26px rgba(225, 6, 0, 0.85); }
+}
+
+@media (max-width: 480px) {
+  .music-toggle {
+    right: 0.7rem;
+    bottom: 0.7rem;
+    width: 48px;
+    height: 48px;
+  }
+  .music-toggle__icon,
+  .music-toggle__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
 /* ===================== Reduced motion ===================== */
 @media (prefers-reduced-motion: reduce) {
   *,
