@@ -1,0 +1,430 @@
+/* ===================== Base ===================== */
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red: #e10600;
+  --red-dark: #9e0400;
+  --yellow: #ffd200;
+  --asphalt: #141414;
+  --asphalt-2: #1e1e1e;
+  --white: #ffffff;
+  --gray: #c7c7c7;
+  --font-display: 'Racing Sans One', system-ui, sans-serif;
+  --font-body: 'Barlow', system-ui, sans-serif;
+  --maxw: 960px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--asphalt);
+  color: var(--white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ===================== Reveal on scroll ===================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+.cards .reveal:nth-child(2) { transition-delay: 0.1s; }
+.cards .reveal:nth-child(3) { transition-delay: 0.2s; }
+
+/* ===================== Checkerboard (bandera a cuadros) ===================== */
+.checkerboard {
+  height: 26px;
+  background: repeating-conic-gradient(#000 0 25%, #fff 0 50%) 0 0 / 26px 26px;
+}
+.hero__check {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/* ===================== Hero ===================== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 3rem 1.25rem 10rem;
+  background: radial-gradient(circle at 50% 28%, #ff3326 0%, #e10600 46%, #9e0400 100%), var(--red);
+}
+
+/* Rayas de velocidad */
+.hero__stripes {
+  position: absolute;
+  inset: -20%;
+  background: repeating-linear-gradient(115deg, transparent 0 40px, rgba(0, 0, 0, 0.12) 40px 80px);
+  animation: stripes 14s linear infinite;
+  opacity: 0.4;
+}
+@keyframes stripes { to { transform: translateX(200px); } }
+
+/* Marca de agua "95" */
+.hero__95 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: min(72vw, 40rem);
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.09);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Flash de largada */
+.hero__flash {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at 50% 62%, rgba(255, 210, 0, 0.9), rgba(255, 210, 0, 0) 62%);
+}
+.hero.is-launching:not(.is-looped) .hero__flash { animation: flash 0.7s ease-out; }
+@keyframes flash {
+  0% { opacity: 0; }
+  22% { opacity: 0.4; }
+  100% { opacity: 0; }
+}
+
+/* Semáforo de largada */
+.startlight {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 0.55rem;
+  padding: 0.6rem 0.85rem;
+  margin-bottom: 1.4rem;
+  background: #0b0b0b;
+  border: 2px solid #2a2a2a;
+  border-radius: 999px;
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.9);
+}
+.startlight__light {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #3a0d0d;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.9);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.startlight__light.is-on {
+  background: #ff2b1a;
+  box-shadow: 0 0 16px 5px rgba(255, 43, 26, 0.85);
+}
+.startlight__light--green { background: #0d2f0d; }
+.startlight__light--green.is-on {
+  background: #2bff5a;
+  box-shadow: 0 0 18px 6px rgba(43, 255, 90, 0.85);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.hero__eyebrow {
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: var(--yellow);
+  opacity: 0;
+}
+.hero.is-launching:not(.is-looped) .hero__eyebrow {
+  animation: pop 0.5s cubic-bezier(0.2, 1.5, 0.4, 1) both;
+}
+.hero.is-looped .hero__eyebrow,
+.hero.is-reduced .hero__eyebrow {
+  animation: none;
+  opacity: 1;
+}
+@keyframes pop {
+  from { opacity: 0; transform: scale(0.6); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 21vw, 9rem);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  text-shadow: 0 6px 0 #7e0300, 0 12px 34px rgba(0, 0, 0, 0.45);
+}
+
+.hero__age {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.hero__number {
+  font-family: var(--font-display);
+  display: inline-grid;
+  place-items: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  font-size: 2rem;
+  background: var(--yellow);
+  color: var(--asphalt);
+  border-radius: 12px;
+  box-shadow: 0 6px 0 #7e0300;
+}
+
+.hero__date {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Pista y auto */
+.hero__track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 26px;
+  height: 86px;
+  z-index: 2;
+  background: linear-gradient(#3a3a3a, #232323);
+  border-top: 3px solid #000;
+}
+.hero__track::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 6px;
+  transform: translateY(-50%);
+  background: repeating-linear-gradient(90deg, var(--yellow) 0 34px, transparent 34px 68px);
+  animation: road 2.2s linear infinite;
+}
+@keyframes road { to { background-position: -68px 0; } }
+
+.hero__car {
+  position: absolute;
+  left: 5%;
+  bottom: 16px;
+  width: clamp(150px, 26vw, 210px);
+  transition: opacity 0.35s ease;
+}
+.hero__car.is-hidden { opacity: 0; }
+.hero__car svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 12px 10px rgba(0, 0, 0, 0.45));
+}
+
+/* Largada: SOLO se mueve el auto; el fondo queda quieto para no marear */
+.hero.is-launching .hero__car {
+  animation: carLaunch 2.4s ease-in-out forwards;
+}
+@keyframes carLaunch {
+  0% { transform: translateX(0); }
+  18% { transform: translateX(0) translateY(-3px) rotate(-2deg); }
+  100% { transform: translateX(165vw) translateY(0) rotate(0); }
+}
+
+/* CTA del hero: amarillo sobre el rojo de Cars */
+.hero .btn--primary {
+  background: var(--yellow);
+  color: var(--asphalt);
+  box-shadow: 0 6px 0 #b89500;
+}
+.hero .btn--primary:hover { box-shadow: 0 4px 0 #b89500; }
+.hero .btn--primary:active { box-shadow: 0 0 0 #b89500; }
+
+/* ===================== Buttons ===================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 0.9rem 1.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.btn--primary {
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 6px 0 var(--red-dark);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn--primary:hover { transform: translateY(2px); box-shadow: 0 4px 0 var(--red-dark); }
+.btn--primary:active { transform: translateY(6px); box-shadow: 0 0 0 var(--red-dark); }
+.btn--primary span { font-size: 1.2rem; line-height: 1; }
+
+/* ===================== Sections ===================== */
+.section { padding: 4.5rem 0; }
+.section--dark { background: var(--asphalt-2); }
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 7vw, 3rem);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+.section__title::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 5px;
+  margin: 0.7rem auto 0;
+  background: var(--yellow);
+  border-radius: 999px;
+}
+.section__subtitle {
+  text-align: center;
+  color: var(--gray);
+  font-weight: 600;
+  margin: 0.6rem 0 2.4rem;
+}
+
+/* ===================== Countdown ===================== */
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.7rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.countdown__box {
+  background: var(--asphalt);
+  border: 2px solid #333;
+  border-radius: 14px;
+  padding: 1.1rem 0.3rem;
+  text-align: center;
+}
+.countdown__value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 8vw, 2.8rem);
+  color: var(--yellow);
+}
+.countdown__label {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.countdown__done {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--yellow);
+}
+
+/* ===================== Cards (detalles) ===================== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+}
+.card {
+  background: var(--asphalt-2);
+  border: 1px solid #2c2c2c;
+  border-top: 4px solid var(--red);
+  border-radius: 18px;
+  padding: 1.8rem 1.2rem;
+  text-align: center;
+}
+.card__icon { font-size: 2rem; }
+.card__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.04em;
+  color: var(--yellow);
+  margin: 0.6rem 0 0.4rem;
+}
+.card__text { font-weight: 700; }
+
+/* ===================== RSVP ===================== */
+.rsvp {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--asphalt);
+  border: 2px dashed #3a3a3a;
+  border-radius: 20px;
+  padding: 2.5rem 1.4rem;
+}
+.rsvp .section__title { font-size: clamp(1.5rem, 6vw, 2.4rem); }
+.rsvp .section__subtitle { margin-bottom: 1.4rem; }
+.rsvp__placeholder { color: var(--gray); font-weight: 600; }
+.rsvp__placeholder strong { color: var(--yellow); }
+
+/* ===================== Closing ===================== */
+.closing {
+  text-align: center;
+  padding-top: 4rem;
+  background: var(--asphalt);
+}
+.closing__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 8vw, 3rem);
+  letter-spacing: 0.02em;
+}
+.closing__text {
+  margin: 0.9rem 0 2.6rem;
+  font-weight: 700;
+  color: var(--gray);
+}
+.closing__small {
+  padding: 1.1rem 1.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+/* ===================== Reduced motion ===================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; }
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>¡Isaac cumple 4! · Invitación</title>
+    <meta name="description" content="¡Arranca la carrera! Isaac cumple 4 años. Sábado 24 de octubre a la 1 PM." />
+    <meta name="theme-color" content="#141414" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700;800&family=Racing+Sans+One&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <noscript>
+        <style>
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important
+            }
+
+            .hero__car {
+                opacity: 1 !important
+            }
+        </style>
+    </noscript>
+</head>
+
+<body>
+
+    <!-- ============================= HERO ============================= -->
+    <header class="hero" id="inicio">
+        <div class="hero__stripes" aria-hidden="true"></div>
+        <div class="hero__95" aria-hidden="true">95</div>
+        <div class="hero__flash" aria-hidden="true"></div>
+
+        <!-- Semáforo de largada -->
+        <div class="startlight" id="startlight" aria-hidden="true">
+            <span class="startlight__light"></span>
+            <span class="startlight__light"></span>
+            <span class="startlight__light"></span>
+            <span class="startlight__light startlight__light--green"></span>
+        </div>
+
+        <div class="hero__content">
+            <h3 class="hero__eyebrow" id="hero-eyebrow">¡Arranca la carrera!</p>
+                <h1 class="hero__name reveal">Isaac</h1>
+                <p class="hero__age reveal">
+                    <span class="hero__number">4</span>
+                    <span>años</span>
+                </p>
+                <p class="hero__date reveal">Sábado 24 de octubre · 1:00 PM</p>
+                <a class="btn btn--primary reveal" href="#detalles">Ver detalles <span aria-hidden="true">›</span></a>
+        </div>
+
+        <!-- Pista y auto -->
+        <div class="hero__track" aria-hidden="true">
+            <div class="hero__car is-hidden" id="hero-car">
+                <svg viewBox="0 0 260 120" role="img" aria-label="Auto de carreras rojo con el número 95">
+                    <ellipse cx="130" cy="104" rx="112" ry="8" fill="rgba(0,0,0,0.35)" />
+                    <rect x="14" y="44" width="12" height="30" rx="3" fill="#7e0300" />
+                    <path d="M20 82 L26 56 Q32 40 54 38 L150 34 Q178 33 200 50 L226 66 Q236 71 236 82 L236 88 L20 88 Z"
+                        fill="#e10600" />
+                    <path d="M20 76 L236 66 L236 74 L20 84 Z" fill="#ffd200" />
+                    <path d="M72 54 L96 40 Q104 36 120 37 L152 39 Q162 40 170 50 Z" fill="#161616" />
+                    <circle cx="128" cy="66" r="17" fill="#ffffff" />
+                    <text x="128" y="73" text-anchor="middle" font-family="'Racing Sans One', sans-serif" font-size="20"
+                        fill="#e10600">95</text>
+                    <circle cx="72" cy="88" r="22" fill="#111111" />
+                    <circle cx="72" cy="88" r="10" fill="#666666" />
+                    <circle cx="196" cy="88" r="22" fill="#111111" />
+                    <circle cx="196" cy="88" r="10" fill="#666666" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="checkerboard hero__check" aria-hidden="true"></div>
+    </header>
+
+    <!-- ======================= CUENTA REGRESIVA ======================= -->
+    <section class="section section--dark" id="cuenta">
+        <div class="container">
+            <h2 class="section__title reveal">Cuenta regresiva</h2>
+            <p class="section__subtitle reveal">Cada vez falta menos para la largada</p>
+
+            <div class="countdown reveal" id="countdown">
+                <div class="countdown__box">
+                    <span class="countdown__value" id="cd-days">--</span>
+                    <span class="countdown__label">Días</span>
+                </div>
+                <div class="countdown__box">
+                    <span class="countdown__value" id="cd-hours">--</span>
+                    <span class="countdown__label">Horas</span>
+                </div>
+                <div class="countdown__box">
+                    <span class="countdown__value" id="cd-minutes">--</span>
+                    <span class="countdown__label">Min</span>
+                </div>
+                <div class="countdown__box">
+                    <span class="countdown__value" id="cd-seconds">--</span>
+                    <span class="countdown__label">Seg</span>
+                </div>
+            </div>
+
+            <p class="countdown__done" id="countdown-done" hidden>¡Hoy es la carrera! 🏁</p>
+        </div>
+    </section>
+
+    <!-- =========================== DETALLES =========================== -->
+    <section class="section" id="detalles">
+        <div class="container">
+            <h2 class="section__title reveal">Detalles de la carrera</h2>
+            <p class="section__subtitle reveal">Anotá la próxima parada</p>
+
+            <div class="cards">
+                <article class="card reveal">
+                    <span class="card__icon" aria-hidden="true">📅</span>
+                    <h3 class="card__title">Fecha</h3>
+                    <p class="card__text">Sábado<br />24 de octubre</p>
+                </article>
+
+                <article class="card reveal">
+                    <span class="card__icon" aria-hidden="true">⏰</span>
+                    <h3 class="card__title">Hora</h3>
+                    <p class="card__text">1:00 PM</p>
+                </article>
+
+                <article class="card reveal">
+                    <span class="card__icon" aria-hidden="true">📍</span>
+                    <h3 class="card__title">Lugar</h3>
+                    <!-- TODO: reemplazar "A definir" por la dirección real cuando esté lista -->
+                    <p class="card__text">A definir</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================= RSVP ============================= -->
+    <section class="section section--dark" id="confirmar">
+        <div class="container">
+            <div class="rsvp reveal">
+                <h2 class="section__title">Confirmá tu asistencia</h2>
+                <p class="section__subtitle">¡Queremos tener todo listo para la largada!</p>
+
+                <!-- TODO: cuando definan el método, reemplazar este bloque por el botón de WhatsApp:
+             <a class="btn btn--primary"
+                href="https://wa.me/54XXXXXXXXXX?text=Hola!%20Confirmo%20para%20los%204%20de%20Isaac">
+                Confirmar por WhatsApp
+             </a> -->
+                <p class="rsvp__placeholder">Método de confirmación: <strong>a definir</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================ CIERRE ============================ -->
+    <footer class="closing">
+        <div class="container">
+            <h2 class="closing__title reveal">¡Te esperamos en la largada!</h2>
+            <p class="closing__text reveal">Con mucho amor,<br />Isaac y familia</p>
+        </div>
+        <div class="checkerboard" aria-hidden="true"></div>
+        <p class="closing__small">4° cumpleaños · Sábado 24 de octubre · 1:00 PM</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
